@@ -1,0 +1,40 @@
+# algoritmos.py
+
+def busqueda_lineal(lista, objetivo):
+    for i in range(len(lista)):
+        if lista[i] == objetivo:
+            return i
+    return -1
+
+def busqueda_binaria(lista, objetivo):
+    inicio = 0
+    fin = len(lista) - 1
+    while inicio <= fin:
+        medio = (inicio + fin) // 2
+        if lista[medio] == objetivo:
+            return medio
+        elif lista[medio] < objetivo:
+            inicio = medio + 1
+        else:
+            fin = medio - 1
+    return -1
+
+def busqueda_interpolacion(lista, objetivo):
+    inicio = 0
+    fin = len(lista) - 1
+    while inicio <= fin and objetivo >= lista[inicio] and objetivo <= lista[fin]:
+        if inicio == fin:
+            if lista[inicio] == objetivo:
+                return inicio
+            return -1
+        pos = inicio + ((objetivo - lista[inicio]) * (fin - inicio) //
+                        (lista[fin] - lista[inicio]))
+        if pos >= len(lista):
+            return -1
+        if lista[pos] == objetivo:
+            return pos
+        if lista[pos] < objetivo:
+            inicio = pos + 1
+        else:
+            fin = pos - 1
+    return -1

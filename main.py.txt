@@ -1,0 +1,29 @@
+# main.py
+
+import random
+import time
+from algoritmos import (
+    busqueda_lineal,
+    busqueda_binaria,
+    busqueda_interpolacion
+)
+
+def medir_tiempo(funcion, lista, objetivo, nombre):
+    inicio = time.time()
+    resultado = funcion(lista, objetivo)
+    fin = time.time()
+    print(f"{nombre}: Índice {resultado}, Tiempo: {round(fin - inicio, 6)} seg")
+
+def main():
+    tamanio = 100_000
+    lista = sorted(random.sample(range(1, 1_000_000), tamanio))
+    objetivo = random.choice(lista)
+    
+    print(f"\n🔍 Buscando el número {objetivo} en una lista de {tamanio} elementos...\n")
+    
+    medir_tiempo(busqueda_lineal, lista, objetivo, "Búsqueda Lineal")
+    medir_tiempo(busqueda_binaria, lista, objetivo, "Búsqueda Binaria")
+    medir_tiempo(busqueda_interpolacion, lista, objetivo, "Búsqueda por Interpolación")
+
+if __name__ == "__main__":
+    main()
